@@ -43,18 +43,24 @@ namespace Traffic_Policer.Ambientevents
 
                             Rage.Native.NativeFunction.Natives.SET_VEHICLE_LIGHTS(car, 1);
 
-
                             if (Functions.IsPlayerPerformingPullover() && Vector3.Distance(Game.LocalPlayer.Character.Position, car.Position) < 20f)
                             {
                                 performingPullover = true;
-                                GameFiber.Wait(4000);
-                                if (car.Exists())
+                                GameFiber.Wait(MathHelper.GetRandomInteger(4000,20000));
+                                if (car.Exists() && MathHelper.GetRandomInteger(0, 3) > 0) // only sometimes notice and switch back on
                                 {
                                     Rage.Native.NativeFunction.Natives.SET_VEHICLE_LIGHTS(car, 0);
                                 }
-                                break;
                             }
                         }
+
+                        if (performingPullover && !Functions.IsPlayerPerformingPullover())
+                        {
+                            // break once player is no longer in pullover
+                            eventRunning = false;
+                            break;
+                        }
+
                         if (Vector3.Distance(Game.LocalPlayer.Character.Position, driver.Position) > 300f)
                         {
                             eventRunning = false;
@@ -62,18 +68,8 @@ namespace Traffic_Policer.Ambientevents
                             break;
                         }
 
-
                     }
                 
-                        
-                   
-                    
-                    if (car.Exists())
-                    {
-                        Rage.Native.NativeFunction.Natives.SET_VEHICLE_LIGHTS(car, 0);
-                    }
-                    
-                    
 
                 }
                 catch (Exception e)
@@ -98,6 +94,18 @@ namespace Traffic_Policer.Ambientevents
                 }
 
             });
+        }
+
+        /// <summary>
+        /// Clean up
+        /// </summary>
+        protected override void End()
+        {
+            base.End();
+            if (car)
+            {
+                Rage.Native.NativeFunction.Natives.SET_VEHICLE_LIGHTS(car, 0);
+            }
         }
     }
 }
