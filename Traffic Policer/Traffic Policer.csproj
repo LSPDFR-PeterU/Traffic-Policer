@@ -121,6 +121,7 @@
     <Compile Include="Callouts\DriverUnderTheInfluence.cs" />
     <Compile Include="Callouts\OwnerWanted.cs" />
     <Compile Include="Callouts\ViolentGangConnection.cs" />
+    <Compile Include="ConsoleCommands.cs" />
     <Compile Include="Impairment Tests\Breathalyzer.cs" />
     <Compile Include="Impairment Tests\DrugTestKit.cs" />
     <Compile Include="TrafficPolicerHandler.cs" />

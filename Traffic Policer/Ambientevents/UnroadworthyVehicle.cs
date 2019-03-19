@@ -71,9 +71,6 @@ namespace Traffic_Policer.Ambientevents
                     {
                         Game.LogTrivial($"Unroadworthy vehicle event chose to have fuel leaking. Event flags: {eventFlags}");
                         car.FuelTankHealth = 51f; // no effect on non player vehicle?
-
-                        Rage.Native.NativeFunction.Natives.AddPetrolDecal(car.Position, 1.5f, 1.5f, 2f);
-
                     }
                     
                     if ((eventFlags & UnroadworthyVehicleEventFlags.EngineSmoking) != 0)

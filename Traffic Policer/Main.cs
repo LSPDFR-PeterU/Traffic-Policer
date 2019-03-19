@@ -60,6 +60,7 @@ namespace Traffic_Policer
             Game.LogTrivial("Traffic Policer " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ", developed by Albo1125, has been initialised.");
             Game.LogTrivial("Go on duty to start Traffic Policer - Traffic Policer.Initialise done.");
             
+            
 
         }
         //Dependencies
@@ -84,6 +85,8 @@ namespace Traffic_Policer
             Game.LogTrivial("In traffic policer duty event handler: " + onDuty.ToString());
             if (onDuty)
             {
+                Game.AddConsoleCommands();
+
                 Albo1125.Common.UpdateChecker.InitialiseUpdateCheckingProcess();
                 if (Albo1125.Common.DependencyChecker.DependencyCheckMain(PluginName, Albo1125CommonVer, MinimumRPHVersion, MadeForGTAVersion, MadeForLSPDFRVersion, RAGENativeUIVersion, AudioFilesToCheckFor))
                 {                    
